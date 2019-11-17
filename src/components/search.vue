@@ -14,6 +14,7 @@
 </script>
 <style>
     .search {
+        flex: 1;
         position: relative;
         margin: 0 14px;
     }

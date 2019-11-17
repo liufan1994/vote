@@ -25,6 +25,9 @@
         methods: {
             textFun(text, index) {
                 this.myIndex = index
+                if (index === 1) {
+                    this.$emit('my-state', '进行中')
+                }
             }
         }
     }
