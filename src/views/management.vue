@@ -6,13 +6,11 @@
             <span class="topButton">创建活动</span>
         </div>
         <!-- 管理活动页面tab -->
-        <foundTab @my-state="myState" />
+        <foundTab @my-state0="myState0" @my-state1="myState1" @my-state2="myState2" />
         <!-- 活动列表 -->
         <activityList :activityLists="activityLists2" />
-        <!-- 间隔 -->
-        <div class="interval"></div>
         <!-- 底部间隔 -->
-        <div class="intervalD"></div>
+        <intervalD/>
         <!-- 导航栏 -->
         <navigation :myIndex="1" />
     </div>
@@ -22,6 +20,7 @@
     import search from '../components/search.vue'
     import foundTab from '../components/foundTab.vue'
     import activityList from '../components/activityList.vue'
+    import intervalD from '../components/intervalD.vue'
 
     export default {
         name: 'management',
@@ -29,7 +28,8 @@
             navigation,
             search,
             foundTab,
-            activityList
+            activityList,
+            intervalD
         },
         data() {
             return {
@@ -140,20 +140,26 @@
         },
         methods: {
             // 点击状态tab
-            // 筛选满足条件的子活动
-            myState(state) {
+            // 筛选全部活动
+            myState0() {
+                this.activityLists2 = []
+                const _activityLists0 = JSON.parse(
+                    JSON.stringify(this.activityLists)
+                )
+                this.activityLists2 = _activityLists0
+            },
+            // 筛选满足进行中的子活动
+            myState1(state) {
+                this.activityLists2 = []
                 // 循环activityLists数组
                 for (let i = 0; i < this.activityLists.length; i++) {
                     let listSubs2 = []
-                    console.log(i)
-                    console.log(this.activityLists[i])
                     // 循环activityLists数组i下标中的listSubs数组
                     for (
                         let a = 0;
                         a < this.activityLists[i].listSubs.length;
                         a++
                     ) {
-                        console.log(state)
                         // 如果listSubs数组a下标中的nameState字符串等于子页面传过来的state字符串
                         if (this.activityLists[i].listSubs[a].nameState === state) {
                             listSubs2.push(this.activityLists[i].listSubs[a])
@@ -167,7 +173,30 @@
                         this.activityLists2.push(_activityLists)
                     }
                 }
+            },
+            // 筛选满足已结束的子活动
+            myState2(state2) {
+                this.activityLists2 = []
+                this.activityLists.map(b => {
+                    let listSubs3 = []
+                    b.listSubs.map(c => {
+                        if (c.nameState === state2) {
+                            listSubs3.push(c)
+                        }
+                    })
+                    if (listSubs3.length > 0) {
+                        const _activityLists3 = JSON.parse(
+                            JSON.stringify(this.activityLists)
+                        )
+                        _activityLists3.listSubs = listSubs3
+                        this.activityLists2.push(_activityLists3)
+                    }
+                })
             }
+        },
+        mounted() {
+            const _activityLists2 = JSON.parse(JSON.stringify(this.activityLists))
+            this.activityLists2 = _activityLists2
         }
     }
 </script>
@@ -188,15 +217,5 @@
         border-radius: 7px;
         text-align: center;
         line-height: 42px;
-    }
-    /* 间隔 */
-    .interval {
-        height: 20px;
-        background-color: #f0f0f0;
-    }
-    /* 底部间隔 */
-    .intervalD {
-        height: 80px;
-        background-color: #f0f0f0;
     }
 </style>

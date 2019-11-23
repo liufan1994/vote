@@ -13,7 +13,7 @@
                         <!-- 账号 -->
                         <div class="account">
                             <div class="accountNumber">{{accountNumber}}</div>
-                            <img class="editHome" src="../assets/edit2.png">
+                            <img class="editHome" src="../assets/edit2.png" @click="editHomeFun">
                         </div>
                         <!-- 绑定 -->
                         <div class="bind">
@@ -31,7 +31,7 @@
                     </div>
                 </div>
                 <!-- 会员 -->
-                <div class="vip">
+                <div class="vip" @click="vipFun">
                     <!-- 会员等级 -->
                     <div class="vipGrade">
                         <img class="vipImg" src="../assets/vip.png">
@@ -65,7 +65,7 @@
             </div>
         </div>
         <!-- 间隔 -->
-        <div class="interval"></div>
+        <interval/>
         <!-- 统计 -->
         <div class="statistics">
             <div class="statisticsContent">
@@ -89,7 +89,7 @@
             <div class="createButton">创建活动</div>
         </div>
         <!-- 间隔 -->
-        <div class="interval"></div>
+        <interval/>
         <!-- 财务明细/工单管理 -->
         <div class="list">
             <div class="financial">
@@ -109,7 +109,7 @@
             </div>
         </div>
         <!-- 间隔 -->
-        <div class="interval"></div>
+        <interval/>
         <!-- 最新公告 -->
         <div class="news">
             <div class="newsTitle">最新公告</div>
@@ -127,8 +127,8 @@
                 </div>
             </div>
         </div>
-        <!-- 间隔 -->
-        <div class="intervalD"></div>
+        <!-- 底部间隔 -->
+        <intervalD/>
         <!-- 客服 -->
         <service/>
         <!-- 导航栏 -->
@@ -138,10 +138,12 @@
 <script>
     import service from '../components/service.vue'
     import navigation from '../components/navigation.vue'
+    import intervalD from '../components/intervalD.vue'
+    import interval from '../components/interval.vue'
 
     export default {
         name: 'home',
-        components: { service, navigation },
+        components: { service, navigation, intervalD, interval },
         data() {
             return {
                 // 头像
@@ -201,6 +203,14 @@
                         newsTime: '2019-11-24 15:12:04'
                     }
                 ]
+            }
+        },
+        methods: {
+            editHomeFun() {
+                this.$router.push('/personalData')
+            },
+            vipFun() {
+                this.$router.push('/member')
             }
         }
     }
@@ -345,11 +355,6 @@
         color: #3399ff;
         margin-left: 10px;
     }
-    /* 间隔 */
-    .interval {
-        height: 14px;
-        background-color: #f0f0f0;
-    }
     /* 统计 */
     .statistics {
         height: 160px;
@@ -434,7 +439,7 @@
     .newsTitle {
         height: 34px;
         color: #666;
-        background-color: #f0f0f0;
+        background-color: #f5f5f5;
         padding-left: 14px;
     }
     /* 公告内容 */
@@ -477,10 +482,5 @@
     .newsTime {
         color: #999;
         font-size: 10px;
-    }
-    /* 底部间隔 */
-    .intervalD {
-        height: 80px;
-        background-color: #f0f0f0;
     }
 </style>

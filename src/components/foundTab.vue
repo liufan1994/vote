@@ -25,8 +25,14 @@
         methods: {
             textFun(text, index) {
                 this.myIndex = index
+                if (index === 0) {
+                    this.$emit('my-state0')
+                }
                 if (index === 1) {
-                    this.$emit('my-state', '进行中')
+                    this.$emit('my-state1', '进行中')
+                }
+                if (index === 2) {
+                    this.$emit('my-state2', '已结束')
                 }
             }
         }

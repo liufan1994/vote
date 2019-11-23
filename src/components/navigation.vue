@@ -39,13 +39,13 @@
                         buttonImg: 'extension',
                         buttonImg2: 'extension-x',
                         buttonName: '推广中心',
-                        myRouter: '/home'
+                        myRouter: '/extend'
                     },
                     {
                         buttonImg: 'my',
                         buttonImg2: 'my-x',
                         buttonName: '我的',
-                        myRouter: '/home'
+                        myRouter: '/my'
                     }
                 ]
             }
@@ -53,6 +53,7 @@
         methods: {
             buttonFun(button) {
                 this.$router.push(button.myRouter)
+                window.scrollTo(0, 0)
             }
         }
     }

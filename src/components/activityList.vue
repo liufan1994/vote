@@ -3,14 +3,15 @@
         <!-- 活动列表 -->
         <div class="activityList" v-for="activityList in activityLists" :key="activityList.id">
             <!-- 间隔 -->
-            <div class="interval"></div>
+            <interval/>
             <!-- 列表头部-一个以上的子活动 -->
             <div class="listHead" v-if="activityList.listSubs.length>1">
                 <!-- 头部左边 -->
                 <div class="headLeft">
                     <div class="leftStyle"></div>
-                    <div class="leftName">{{activityList.headName}}</div>
-                    <img class="leftImg" src="../assets/edit.png">
+                    <div class="leftName" v-if="isShowHeadName">{{activityList.headName}}</div>
+                    <input type="text" :placeholder="activityList.headName" v-else>
+                    <img class="leftImg" src="../assets/edit.png" @click="editFun" v-if="isShowEdit">
                 </div>
                 <!-- 头部右边 -->
                 <div class="headRight">
@@ -75,8 +76,13 @@
     </div>
 </template>
 <script>
+    import interval from '../components/interval'
+
     export default {
         name: 'activityList',
+        components: {
+            interval
+        },
         props: {
             activityLists: {
                 type: Array, // Object
@@ -87,8 +93,16 @@
         },
         data() {
             return {
-                nameState2: '进行中'
+                // 子活动默认状态
+                nameState2: '进行中',
+                // 专题名称
+                isShowHeadName: true,
+                // 专题名称编辑图标
+                isShowEdit: true
             }
+        },
+        methods: {
+            editFun() {}
         }
     }
 </script>

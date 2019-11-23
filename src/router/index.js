@@ -32,6 +32,26 @@ const routes = [
         path: '/management',
         name: 'management',
         component: () => import('../views/management.vue')
+    },
+    {
+        path: '/extend',
+        name: 'extend',
+        component: () => import('../views/extend.vue')
+    },
+    {
+        path: '/my',
+        name: 'my',
+        component: () => import('../views/my.vue')
+    },
+    {
+        path: '/personalData',
+        name: 'personalData',
+        component: () => import('../views/personalData.vue')
+    },
+    {
+        path: '/member',
+        name: 'member',
+        component: () => import('../views/member.vue')
     }
 ]
 const router = new VueRouter({
