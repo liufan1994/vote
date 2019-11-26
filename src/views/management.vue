@@ -1,4 +1,5 @@
 <template>
+    <!-- 管理活动 -->
     <div class="management">
         <div class="managementTop">
             <!-- 搜索框 -->

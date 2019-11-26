@@ -1,4 +1,5 @@
 <template>
+    <!-- 推广中心 -->
     <div class="extend">
         <!-- 推广内容 -->
         <div class="extendContent">

@@ -1,4 +1,5 @@
 <template>
+    <!-- 首页 -->
     <div class="home">
         <!-- 头部卡片/数据统计内容 -->
         <div class="cardContent">
@@ -51,7 +52,7 @@
                     <div class="balanceNumber">¥{{accountBalance}}.00</div>
                     <div class="balanceTitle">
                         <span>账户余额</span>
-                        <span class="balanceButton">充值></span>
+                        <span class="balanceButton" @click="balanceButtonFun">充值></span>
                     </div>
                 </div>
                 <!-- 推广余额 -->
@@ -209,8 +210,12 @@
             editHomeFun() {
                 this.$router.push('/personalData')
             },
+            // 会员升级
             vipFun() {
                 this.$router.push('/member')
+            },
+            balanceButtonFun() {
+                this.$router.push('/recharge')
             }
         }
     }

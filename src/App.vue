@@ -22,7 +22,7 @@
         -moz-osx-font-smoothing: grayscale;
         color: #333;
         font-size: 14px;
-        /* background-color: #f5f5f5; */
+        background-color: #f5f5f5;
     }
     * {
         margin: 0;

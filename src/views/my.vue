@@ -1,4 +1,5 @@
 <template>
+    <!-- 我的 -->
     <div class="my">
         <!-- 顶部 -->
         <div class="myTop">
@@ -17,7 +18,7 @@
                 </div>
             </div>
             <!-- 右边 -->
-            <div class="topRight">
+            <div class="topRight" @click="vipFun">
                 <img class="topRightImg" src="../assets/vip2.png">
                 <div>
                     <div class="topRightName">{{topRightName}}</div>
@@ -29,7 +30,7 @@
             <div class="moneyState">
                 <div class="moneyStateName">账户余额</div>
                 <div class="moneyStateNumber">¥{{moneyStateNumber}}.00</div>
-                <div class="moneyStateButton">充值</div>
+                <div class="moneyStateButton" @click="moneyStateButtonFun">充值</div>
             </div>
             <div class="moneyLine"></div>
             <div class="moneyState">
@@ -131,6 +132,16 @@
                         isShowFunctionRightImg: false
                     }
                 ]
+            }
+        },
+        methods: {
+            // 会员升级
+            vipFun() {
+                this.$router.push('/member')
+            },
+            // 充值
+            moneyStateButtonFun() {
+                this.$router.push('/recharge')
             }
         },
         mounted() {

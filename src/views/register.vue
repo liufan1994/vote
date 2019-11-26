@@ -1,4 +1,5 @@
 <template>
+    <!-- 注册 -->
     <div class="register">
         <!-- 顶部样式 -->
         <myhead/>

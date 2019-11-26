@@ -1,4 +1,5 @@
 <template>
+    <!-- 个人信息 -->
     <div class="personalData">
         <!-- 头部 -->
         <div class="personalDataHead">

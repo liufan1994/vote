@@ -1,4 +1,5 @@
 <template>
+    <!-- 找回密码-重置密码 -->
     <div class="reset">
         <!-- 顶部 -->
         <myhead/>

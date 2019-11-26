@@ -1,4 +1,5 @@
 <template>
+    <!-- 找回密码-验证手机号 -->
     <div class="forget">
         <!-- 顶部 -->
         <myhead/>
