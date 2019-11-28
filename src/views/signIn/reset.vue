@@ -40,7 +40,7 @@
     </div>
 </template>
 <script>
-    import myhead from '../components/myhead'
+    import myhead from '../../components/myhead'
     export default {
         name: 'reset',
         components: {
@@ -104,6 +104,9 @@
     }
 </script>
 <style>
+    .reset {
+        background-color: #fff;
+    }
     /* 登录标题 */
     .resetTitle {
         text-align: center;

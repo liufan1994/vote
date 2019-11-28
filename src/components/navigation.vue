@@ -1,4 +1,5 @@
 <template>
+    <!-- 导航栏 -->
     <div class="navigation">
         <!-- 按钮 -->
         <div class="navigationButton" v-for="(button,index) in buttons" :key="button.id" @click="buttonFun(button,index)">
@@ -21,7 +22,6 @@
         },
         data() {
             return {
-                buttonName2: true,
                 buttons: [
                     {
                         buttonImg: 'home',

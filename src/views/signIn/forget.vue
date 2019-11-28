@@ -43,7 +43,7 @@
     </div>
 </template>
 <script>
-    import myhead from '../components/myhead'
+    import myhead from '../../components/myhead'
     export default {
         name: 'forget',
         components: {
@@ -126,6 +126,9 @@
     }
 </script>
 <style>
+    .forget {
+        background-color: #fff;
+    }
     /* 登录标题 */
     .forgetTitle {
         text-align: center;

@@ -1,4 +1,5 @@
 <template>
+    <!-- 间隔 -->
     <div class="interval"></div>
 </template>
 <style>

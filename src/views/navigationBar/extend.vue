@@ -72,9 +72,9 @@
     </div>
 </template>
 <script>
-    import navigation from '../components/navigation'
-    import interval from '../components/interval'
-    import intervalD from '../components/intervalD'
+    import navigation from '../../components/navigation'
+    import interval from '../../components/interval'
+    import intervalD from '../../components/intervalD'
 
     export default {
         name: 'extend',

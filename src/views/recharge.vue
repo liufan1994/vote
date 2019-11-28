@@ -14,7 +14,7 @@
                 <div class="rechargeCurrentName">充值金额</div>
                 <div class="choiceList">
                     <div class="choiceMoney" :class="{choiceMoney2:myIndex===index}" v-for="(choiceMoney,index) in choiceMoneys" :key="index" @click="choiceMoneyFun(index)">{{choiceMoney.choiceMoney}}元</div>
-                    <input class="choiceMoney3" type="number" placeholder="自定义金额">
+                    <input class="choiceMoney3" :class="{choiceMoney4:isShowchoiceMoney3}" type="number" placeholder="自定义金额" @click="choiceMoney3Fun">
                 </div>
             </div>
         </div>
@@ -67,6 +67,8 @@
                         choiceMoney: '1000'
                     }
                 ],
+                // 点击输入金额
+                isShowchoiceMoney3: false,
                 // 支付方式
                 myIndex2: 0,
                 methodLists: [
@@ -85,10 +87,16 @@
             // 充值金额-单选
             choiceMoneyFun(index) {
                 this.myIndex = index
+                this.isShowchoiceMoney3 = false
             },
             // 支付方式
             methodFun(index) {
                 this.myIndex2 = index
+            },
+            // 点击输入金额
+            choiceMoney3Fun() {
+                this.isShowchoiceMoney3 = true
+                this.myIndex = this.choiceMoneys.length + 1
             }
         }
     }
@@ -145,6 +153,9 @@
         width: 102px;
         height: 45px;
         margin-right: 0;
+    }
+    .choiceMoney4 {
+        border: #3399ff 1px solid;
     }
     .choiceMoney:nth-child(3n) {
         margin-right: 0;

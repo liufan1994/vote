@@ -6,7 +6,7 @@
             <!-- 左边 -->
             <div class="topLeft">
                 <!-- 头像 -->
-                <img class="topLeftImg" :src="require('../assets/'+topLeftImg)">
+                <img class="topLeftImg" :src="require('../../assets/'+topLeftImg)">
                 <div>
                     <!-- 用户名称 -->
                     <div class="topLeftName">{{topLeftName}}</div>
@@ -19,7 +19,7 @@
             </div>
             <!-- 右边 -->
             <div class="topRight" @click="vipFun">
-                <img class="topRightImg" src="../assets/vip2.png">
+                <img class="topRightImg" src="../../assets/vip2.png">
                 <div>
                     <div class="topRightName">{{topRightName}}</div>
                     <div class="topRightTime">{{topRightTime}}到期</div>
@@ -45,13 +45,13 @@
         <div class="functionList" v-for="functionList in functionLists" :key="functionList.id">
             <!-- 左 -->
             <div class="functionListLeft">
-                <img class="functionLeftImg" :src="require('../assets/'+functionList.functionListImg+'.png')">
+                <img class="functionLeftImg" :src="require('../../assets/'+functionList.functionListImg+'.png')">
             </div>
             <!-- 右 -->
             <div class="functionListRight">
                 <div class="functionLeftName">{{functionList.functionLeftName}}</div>
                 <div class="functionListRight2">
-                    <img class="functionRightImg" :src="require('../assets/'+functionList.functionRightImg)" v-if="functionList.isShowFunctionRightImg">
+                    <img class="functionRightImg" :src="require('../../assets/'+functionList.functionRightImg)" v-if="functionList.isShowFunctionRightImg">
                     <div class="functionRightText" v-if="functionList.isShowFunctionRightText">{{functionList.functionRightText}}</div>
                     <div class="iconfont icon-you"></div>
                 </div>
@@ -64,9 +64,9 @@
     </div>
 </template>
 <script>
-    import navigation from '../components/navigation'
-    import intervalD from '../components/intervalD'
-    import interval from '../components/interval'
+    import navigation from '../../components/navigation'
+    import intervalD from '../../components/intervalD'
+    import interval from '../../components/interval'
 
     export default {
         name: 'my',

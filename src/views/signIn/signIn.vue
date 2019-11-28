@@ -36,7 +36,7 @@
     </div>
 </template>
 <script>
-    import myhead from '../components/myhead'
+    import myhead from '../../components/myhead'
     export default {
         name: 'app',
         components: {
@@ -136,6 +136,9 @@
     }
 </script>
 <style>
+    .app {
+        background-color: #fff;
+    }
     /* 登录标题 */
     .signin {
         text-align: center;

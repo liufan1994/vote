@@ -39,7 +39,7 @@
     </div>
 </template>
 <script>
-    import myhead from '../components/myhead'
+    import myhead from '../../components/myhead'
     export default {
         name: 'register',
         components: { myhead },
@@ -151,6 +151,9 @@
     }
 </script>
 <style>
+    .register {
+        background-color: #fff;
+    }
     /* 顶部 */
     .top {
         position: relative;

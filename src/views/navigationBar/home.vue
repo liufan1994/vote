@@ -8,19 +8,19 @@
                 <!-- 个人信息 -->
                 <div class="Personal">
                     <!-- 头像 -->
-                    <img class="portraitImg" :src="require('../assets/'+portraitImg)">
+                    <img class="portraitImg" :src="require('../../assets/'+portraitImg)">
                     <!-- 信息 -->
                     <div class="PersonalContent">
                         <!-- 账号 -->
                         <div class="account">
                             <div class="accountNumber">{{accountNumber}}</div>
-                            <img class="editHome" src="../assets/edit2.png" @click="editHomeFun">
+                            <img class="editHome" src="../../assets/edit2.png" @click="editHomeFun">
                         </div>
                         <!-- 绑定 -->
                         <div class="bind">
                             <!-- 微信 -->
                             <div class="weChat">
-                                <img class="weChatImg" src="../assets/weChat.png">
+                                <img class="weChatImg" src="../../assets/weChat.png">
                                 <div class="weChatText">{{weChatText}}</div>
                             </div>
                             <!-- 公众号 -->
@@ -35,7 +35,7 @@
                 <div class="vip" @click="vipFun">
                     <!-- 会员等级 -->
                     <div class="vipGrade">
-                        <img class="vipImg" src="../assets/vip.png">
+                        <img class="vipImg" src="../../assets/vip.png">
                         <div class="vipText">{{vipText}}</div>
                     </div>
                     <!-- 会员到期时间 -->
@@ -93,20 +93,20 @@
         <interval/>
         <!-- 财务明细/工单管理 -->
         <div class="list">
-            <div class="financial">
+            <div class="financial" @click="financialFun">
                 <div class="financialLeft">
-                    <img class="financialImg" src="../assets/finance.png">
+                    <img class="financialImg" src="../../assets/finance.png">
                     <div>财务明细</div>
                 </div>
-                <img class="financialMore" src="../assets/more.png">
+                <img class="financialMore" src="../../assets/more.png">
             </div>
             <div class="line"></div>
-            <div class="financial">
+            <div class="financial" @click="financial2Fun">
                 <div class="financialLeft">
-                    <img class="financialImg" src="../assets/workOrder.png">
+                    <img class="financialImg" src="../../assets/workOrder.png">
                     <div>工单管理</div>
                 </div>
-                <img class="financialMore" src="../assets/more.png">
+                <img class="financialMore" src="../../assets/more.png">
             </div>
         </div>
         <!-- 间隔 -->
@@ -121,7 +121,7 @@
                     <div class="newsText">{{news.newsText}}</div>
                     <!-- 图片状态 -->
                     <div class="newsImg">
-                        <img class="newsImg1" :class="{newsImg2:news.newsImgs.length>1}" v-for="newsImg in news.newsImgs" :key="newsImg.id" :src="require('../assets/'+newsImg.newsImgUrl)">
+                        <img class="newsImg1" :class="{newsImg2:news.newsImgs.length>1}" v-for="newsImg in news.newsImgs" :key="newsImg.id" :src="require('../../assets/'+newsImg.newsImgUrl)">
                     </div>
                     <!-- 发布公告时间 -->
                     <div class="newsTime">{{news.newsTime}}</div>
@@ -137,10 +137,10 @@
     </div>
 </template>
 <script>
-    import service from '../components/service.vue'
-    import navigation from '../components/navigation.vue'
-    import intervalD from '../components/intervalD.vue'
-    import interval from '../components/interval.vue'
+    import service from '../../components/service.vue'
+    import navigation from '../../components/navigation.vue'
+    import intervalD from '../../components/intervalD.vue'
+    import interval from '../../components/interval.vue'
 
     export default {
         name: 'home',
@@ -209,13 +209,27 @@
         methods: {
             editHomeFun() {
                 this.$router.push('/personalData')
+                window.scrollTo(0, 0)
             },
             // 会员升级
             vipFun() {
                 this.$router.push('/member')
+                window.scrollTo(0, 0)
             },
+            // 点击充值
             balanceButtonFun() {
                 this.$router.push('/recharge')
+                window.scrollTo(0, 0)
+            },
+            // 点击财务明细
+            financialFun() {
+                this.$router.push('/financial/rechargeRecord')
+                window.scrollTo(0, 0)
+            },
+            // 点击工单管理
+            financial2Fun() {
+                this.$router.push('/myWork')
+                window.scrollTo(0, 0)
             }
         }
     }
@@ -232,7 +246,7 @@
         position: relative;
         width: 347px;
         height: 174px;
-        background-image: url(../assets/homeCard.png);
+        background-image: url(../../assets/homeCard.png);
         background-size: 100%;
         margin: 0 auto 40px;
         border-radius: 7px;
