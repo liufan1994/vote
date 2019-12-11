@@ -3,34 +3,26 @@
     <div class="management">
         <div class="managementTop">
             <!-- 搜索框 -->
-            <search/>
+            <search myPlaceholder="请输入专题/活动名称" />
             <span class="topButton">创建活动</span>
         </div>
         <!-- 管理活动页面tab -->
         <foundTab @my-state0="myState0" @my-state1="myState1" @my-state2="myState2" />
         <!-- 活动列表 -->
         <activityList :activityLists="activityLists2" />
-        <!-- 底部间隔 -->
-        <intervalD/>
-        <!-- 导航栏 -->
-        <navigation :myIndex="1" />
     </div>
 </template>
 <script>
-    import navigation from '../../components/navigation.vue'
     import search from '../../components/search.vue'
     import foundTab from '../../components/foundTab.vue'
     import activityList from '../../components/activityList.vue'
-    import intervalD from '../../components/intervalD.vue'
 
     export default {
         name: 'management',
         components: {
-            navigation,
             search,
             foundTab,
-            activityList,
-            intervalD
+            activityList
         },
         data() {
             return {
@@ -206,7 +198,7 @@
     .managementTop {
         display: flex;
         align-items: center;
-        background-color: #f0f0f0;
+        background-color: #f5f5f5;
         padding-right: 14px;
     }
     /* 顶部按钮 */

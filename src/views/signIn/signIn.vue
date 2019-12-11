@@ -26,7 +26,8 @@
                 <div class="tips1" v-if="isShowCode">请输入正确的验证码</div>
             </div>
         </div>
-        <div class="signinB" @click="signinButtonFun">登录</div>
+        <!-- 登录 -->
+        <bigButtonDetermine class="signinB" @click="signinButtonFun" determine="登录" />
         <!-- 忘记密码/注册 -->
         <div class="bottom">
             <router-link class="bottomText" to="/forget" tag="div">忘记密码</router-link>
@@ -37,10 +38,13 @@
 </template>
 <script>
     import myhead from '../../components/myhead'
+    import bigButtonDetermine from '../../components/bigButtonDetermine'
+
     export default {
         name: 'app',
         components: {
-            myhead
+            myhead,
+            bigButtonDetermine
         },
         data() {
             return {
@@ -188,14 +192,8 @@
     }
     /* 登录按钮 */
     .signinB {
-        width: 333px;
-        height: 42px;
-        color: #fff;
-        background-color: #3399ff;
-        text-align: center;
-        line-height: 42px;
+        width: 348px;
         margin: 80px auto 20px;
-        border-radius: 7px;
     }
     /* 忘记密码/注册 */
     .bottom {

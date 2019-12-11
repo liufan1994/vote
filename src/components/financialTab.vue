@@ -1,21 +1,16 @@
 <template>
     <!-- 财务明细Tab -->
     <div class="financialTab">
-        <div class="financialTabName" :class="{financialTabName2:myIndex===index}" v-for="(financialTab,index) in financialTabs" :key="index" @click="financialTabNameFun(financialTab)">{{financialTab.financialTabName}}</div>
+        <div class="financialTabName" :class="{financialTabName2:myIndex===index}" v-for="(financialTab,index) in financialTabs" :key="index" @click="financialTabNameFun(financialTab,index)">{{financialTab.financialTabName}}</div>
     </div>
 </template>
 <script>
     export default {
         name: 'financialTab',
-        props: {
-            myIndex: {
-                type: [String, Number],
-                default: 0
-            }
-        },
         data() {
             return {
                 // 财务明细Tab
+                myIndex: 0,
                 financialTabs: [
                     {
                         financialTabName: '充值记录',
@@ -38,8 +33,23 @@
         },
         methods: {
             // 点击tab
-            financialTabNameFun(financialTab) {
+            financialTabNameFun(financialTab, index) {
+                this.myIndex = index
                 this.$router.push(financialTab.recordRouter)
+            }
+        },
+        mounted() {
+            if (this.$route.path === '/financial/withdrawRecord') {
+                this.myIndex = 3
+            }
+            if (this.$route.pash === '/financial/extendRecord') {
+                this.myIndex = 2
+            }
+            if (this.$route.path === '/financial/consumption') {
+                this.myIndex = 1
+            }
+            if (this.$route.pash === '/financial/rechargeRecord') {
+                this.myIndex = 0
             }
         }
     }

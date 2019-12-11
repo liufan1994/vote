@@ -36,7 +36,7 @@
             <div class="moneyState">
                 <div class="moneyStateName">推广奖励</div>
                 <div class="moneyStateNumber">¥{{moneyStateNumber2}}.00</div>
-                <div class="moneyStateButton">提现</div>
+                <div class="moneyStateButton" @click="withdrawFun">提现</div>
             </div>
         </div>
         <!-- 间隔 -->
@@ -57,22 +57,14 @@
                 </div>
             </div>
         </div>
-        <!-- 底部间隔 -->
-        <intervalD/>
-        <!-- 导航栏 -->
-        <navigation :myIndex="3" />
     </div>
 </template>
 <script>
-    import navigation from '../../components/navigation'
-    import intervalD from '../../components/intervalD'
     import interval from '../../components/interval'
 
     export default {
         name: 'my',
         components: {
-            navigation,
-            intervalD,
             interval
         },
         data() {
@@ -138,10 +130,17 @@
             // 会员升级
             vipFun() {
                 this.$router.push('/member')
+                window.scrollTo(0, 0)
             },
             // 充值
             moneyStateButtonFun() {
                 this.$router.push('/recharge')
+                window.scrollTo(0, 0)
+            },
+            // 提现
+            withdrawFun() {
+                this.$router.push('/extensionWithdraw')
+                window.scrollTo(0, 0)
             }
         },
         mounted() {
@@ -177,7 +176,6 @@
         height: 63px;
         border-radius: 50%;
         margin-right: 14px;
-        object-fit: cover;
     }
     /* 左边-名称 */
     .topLeftName {
@@ -289,7 +287,6 @@
         height: 25px;
         border-radius: 4px;
         margin-right: 14px;
-        object-fit: cover;
     }
     .functionRightText {
         margin-right: 14px;

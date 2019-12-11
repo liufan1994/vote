@@ -1,7 +1,7 @@
 <template>
-    <div>
+    <div @click="allFun">
         <!-- 活动列表 -->
-        <div class="activityList" v-for="activityList in activityLists" :key="activityList.id">
+        <div class="activityList" v-for="(activityList,index) in activityLists" :key="index">
             <!-- 间隔 -->
             <interval/>
             <!-- 列表头部-一个以上的子活动 -->
@@ -9,25 +9,29 @@
                 <!-- 头部左边 -->
                 <div class="headLeft">
                     <div class="leftStyle"></div>
-                    <div class="leftName" v-if="isShowHeadName">{{activityList.headName}}</div>
-                    <input type="text" :placeholder="activityList.headName" v-else>
-                    <img class="leftImg" src="../assets/edit.png" @click="editFun" v-if="isShowEdit">
+                    <div class="leftName" v-if="myIndex2!==index">{{activityList.headName}}</div>
+                    <input ref="inputDom" type="text" id="headInput" :placeholder="activityList.headName" v-else @blur="leftInputFun(index)" v-model="leftInput">
+                    <img class="leftImg" src="../assets/edit.png" @click.stop="editFun(index)" v-if="myIndex2!==index">
                 </div>
                 <!-- 头部右边 -->
                 <div class="headRight">
-                    <div class="rightButton">新增子活动</div>
-                    <div class="rightSetup">
+                    <!-- 新增子活动按钮 -->
+                    <div class="rightButton" @click="rightButtonFun">新增子活动</div>
+                    <!-- 设置 -->
+                    <div class="rightSetup" @click.stop="rightSetupFun(index)">
                         <div class="setupName">设置</div>
                         <div class="iconfont icon-xiala"></div>
+                        <!-- 头部设置按钮下拉框 -->
+                        <dropDownBox v-if="myIndex===index" :dropDownBoxs="dropDownBoxs" />
                     </div>
                 </div>
             </div>
             <!-- 列表头部-一个子活动 -->
             <div class="listHead2" v-else>
-                <div class="rightButton">新增子活动</div>
+                <div class="rightButton" @click="rightButtonFun">新增子活动</div>
             </div>
             <!-- 子活动列表 -->
-            <div class="listSub" v-for="listSub in activityList.listSubs" :key="listSub.id">
+            <div class="listSub" v-for="(listSub,index2) in activityList.listSubs" :key="index2">
                 <!-- 子活动名字 -->
                 <div class="subName">
                     <div class="nameTitle">{{listSub.nameTitle}}</div>
@@ -56,13 +60,17 @@
                     </div>
                     <!-- 子活动数据右边 -->
                     <div class="dataRight">
-                        <div class="dataRightSetup dataRightSetup2">
+                        <div class="dataRightSetup dataRightSetup2" @click.stop="dataRightSetupFun(index,index2)">
                             <div class="dataSetupText">设置</div>
                             <div class="iconfont icon-xiala"></div>
+                            <!-- 子活动数据右边-设置按钮下拉框 -->
+                            <dropDownBox v-if="myIndex3===index&&myIndex4===index2" :dropDownBoxs="dropDownBoxs2" @dropDownBox-fun="dropDownBoxFun2" />
                         </div>
-                        <div class="dataRightSetup">
+                        <div class="dataRightSetup" @click.stop="dataRightSetup2Fun(index,index2)">
                             <div class="dataSetupText">操作</div>
                             <div class="iconfont icon-xiala"></div>
+                            <!-- 子活动数据右边-操作按钮下拉框 -->
+                            <dropDownBox v-if="myIndex3===index&&myIndex5===index2" :dropDownBoxs="dropDownBoxs3" @dropDownBox-fun="dropDownBoxFun" />
                         </div>
                     </div>
                 </div>
@@ -77,11 +85,13 @@
 </template>
 <script>
     import interval from '../components/interval'
+    import dropDownBox from '../components/dropDownBox'
 
     export default {
         name: 'activityList',
         components: {
-            interval
+            interval,
+            dropDownBox
         },
         props: {
             activityLists: {
@@ -95,18 +105,152 @@
             return {
                 // 子活动默认状态
                 nameState2: '进行中',
-                // 专题名称
-                isShowHeadName: true,
-                // 专题名称编辑图标
-                isShowEdit: true
+                leftInput: '',
+                // 点击头部编辑专题图标，默认下标为-1
+                myIndex2: -1,
+                // 点击头部设置按钮，默认下标为-1
+                myIndex: -1,
+                // 头部设置-下拉框列表内容
+                dropDownBoxs: [
+                    { dropDownBox: '专题网址' },
+                    { dropDownBox: '删除' }
+                ],
+                // 点击子活动设置按钮，默认专题下标为-1
+                myIndex3: -1,
+                // 点击子活动设置按钮，默认子活动下标为-1
+                myIndex4: -1,
+                // 点击子活动操作按钮，默认子活动下标为-1
+                myIndex5: -1,
+                // 子活动设置-下拉框列表内容
+                dropDownBoxs2: [
+                    { dropDownBox: '活动设置' },
+                    { dropDownBox: '选手管理' },
+                    { dropDownBox: '页面设置' },
+                    { dropDownBox: '投票设置' },
+                    { dropDownBox: '评论管理' },
+                    { dropDownBox: '票数排行' }
+                ],
+                // 子活动操作-下拉框列表内容
+                dropDownBoxs3: [
+                    { dropDownBox: '操作记录' },
+                    { dropDownBox: '活动网址' },
+                    { dropDownBox: '复制活动' },
+                    { dropDownBox: '清空' },
+                    { dropDownBox: '删除' }
+                ]
             }
         },
         methods: {
-            editFun() {}
+            // 点击整个页面
+            allFun() {
+                this.myIndex = -1
+                this.myIndex3 = -1
+            },
+            // 点击编辑图标
+            editFun(index) {
+                this.myIndex = -1
+                this.myIndex3 = -1
+                if (this.myIndex2 === index) {
+                    if (this.myIndex2 === -1) {
+                        this.myIndex2 = index
+                    } else {
+                        this.myIndex2 = -1
+                    }
+                } else {
+                    this.myIndex2 = index
+                }
+                this.$nextTick(() => {
+                    this.$refs.inputDom[0].focus()
+                })
+            },
+            // 点击头部设置按钮
+            rightSetupFun(index) {
+                // 如果myIndex和index相等，表示点击的是同一个下标
+                // console.log(index)
+                this.myIndex2 = -1
+                this.myIndex3 = -1
+                if (this.myIndex === index) {
+                    if (this.myIndex === -1) {
+                        this.myIndex = index
+                    } else {
+                        this.myIndex = -1
+                    }
+                } else {
+                    this.myIndex = index
+                }
+            },
+            // 头部专题输入框失去光标
+            leftInputFun(index) {
+                this.myIndex2 = -1
+                // console.log(this.leftInput)
+                if (this.leftInput.length > 0) {
+                    this.activityLists[index].headName = this.leftInput
+                }
+            },
+            // 新增子活动按钮
+            rightButtonFun() {
+                this.$router.push('/createEvent')
+            },
+            // 点击子活动设置按钮
+            dataRightSetupFun(index, index2) {
+                // console.log(index)
+                this.myIndex = -1
+                this.myIndex2 = -1
+                this.myIndex5 = -1
+                if (this.myIndex3 === index && this.myIndex4 === index2) {
+                    if (this.myIndex3 === -1 && this.myIndex4 === -1) {
+                        this.myIndex3 = index
+                        this.myIndex4 = index2
+                    } else {
+                        this.myIndex3 = -1
+                        this.myIndex4 = -1
+                    }
+                } else {
+                    this.myIndex3 = index
+                    this.myIndex4 = index2
+                }
+            },
+            // 点击子活动操作按钮
+            dataRightSetup2Fun(index, index2) {
+                this.myIndex = -1
+                this.myIndex2 = -1
+                this.myIndex4 = -1
+                if (this.myIndex3 === index && this.myIndex5 === index2) {
+                    if (this.myIndex3 === -1 && this.myIndex5 === -1) {
+                        this.myIndex3 = index
+                        this.myIndex5 = index2
+                    } else {
+                        this.myIndex3 = -1
+                        this.myIndex5 = -1
+                    }
+                } else {
+                    this.myIndex3 = index
+                    this.myIndex5 = index2
+                }
+            },
+            // 点击子活动操作下拉框
+            dropDownBoxFun(index) {
+                // console.log(index)
+                if (index === 0) {
+                    this.$router.push('/operationRecord')
+                }
+            },
+            // 点击子活动设置下拉框
+            dropDownBoxFun2(index) {
+                if (index === 4) {
+                    this.$router.push('/comment')
+                }
+                if (index === 5) {
+                    this.$router.push('/voteRanking')
+                }
+            }
         }
     }
 </script>
-<style>
+<style >
+    input {
+        outline: none;
+    }
     /* 活动列表 */
     .activityList {
         background-color: #fff;
@@ -119,12 +263,11 @@
         height: 56px;
         display: flex;
         justify-content: space-between;
+        align-items: center;
         background-color: #f5f9fc;
         padding: 0 14px;
-        line-height: 56px;
     }
     .listHead2 {
-        align-items: center;
         justify-content: flex-end;
     }
     /* 头部左边 */
@@ -166,6 +309,7 @@
     }
     /* 右边设置 */
     .rightSetup {
+        position: relative;
         display: flex;
         align-items: center;
         margin-left: 20px;
@@ -245,6 +389,7 @@
     }
     /* 数据右边1 */
     .dataRightSetup {
+        position: relative;
         display: flex;
         align-items: center;
     }

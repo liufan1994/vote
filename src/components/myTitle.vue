@@ -1,7 +1,9 @@
 <template>
     <!-- 标头 -->
     <div class="myTitle">
-        <div class="iconfont icon-xiangzuo"></div>
+        <!-- 返回 -->
+        <div class="iconfont icon-xiangzuo" @click="returnFun"></div>
+        <!-- 标题 -->
         <div class="titleName">{{titleName}}</div>
     </div>
 </template>
@@ -12,6 +14,12 @@
             titleName: {
                 type: [String, Number],
                 default: ''
+            }
+        },
+        methods: {
+            // 返回
+            returnFun() {
+                this.$router.go(-1)
             }
         }
     }

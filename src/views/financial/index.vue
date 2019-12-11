@@ -1,11 +1,12 @@
 <template>
+    <!-- 财务明细-公共页面 -->
     <div>
         <!-- 标头 -->
         <myTitle titleName="财务明细" />
         <!-- 搜索 -->
         <search/>
         <!-- 财务明细Tab -->
-        <financialTab :myIndex="0" />
+        <financialTab />
         <!-- 间隔 -->
         <interval/>
         <router-view/>

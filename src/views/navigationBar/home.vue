@@ -60,7 +60,7 @@
                     <div class="balanceNumber">¥{{extensionBalance}}.00</div>
                     <div class="balanceTitle">
                         <span>推广余额</span>
-                        <span class="balanceButton">提现></span>
+                        <span class="balanceButton" @click="withdrawFun">提现></span>
                     </div>
                 </div>
             </div>
@@ -87,7 +87,7 @@
                 </div>
             </div>
             <!-- 创建活动按钮 -->
-            <div class="createButton">创建活动</div>
+            <div class="createButton" @click="createButtonFun">创建活动</div>
         </div>
         <!-- 间隔 -->
         <interval/>
@@ -117,7 +117,7 @@
             <!-- 公告内容 -->
             <div class="newsContent">
                 <!-- 公告内容1 -->
-                <div class="newsContent1" v-for="news in newss" :key="news.id">
+                <div class="newsContent1" v-for="news in newss" :key="news.id" @click="newsContentFun">
                     <div class="newsText">{{news.newsText}}</div>
                     <!-- 图片状态 -->
                     <div class="newsImg">
@@ -128,23 +128,14 @@
                 </div>
             </div>
         </div>
-        <!-- 底部间隔 -->
-        <intervalD/>
-        <!-- 客服 -->
-        <service/>
-        <!-- 导航栏 -->
-        <navigation/>
     </div>
 </template>
 <script>
-    import service from '../../components/service.vue'
-    import navigation from '../../components/navigation.vue'
-    import intervalD from '../../components/intervalD.vue'
     import interval from '../../components/interval.vue'
 
     export default {
         name: 'home',
-        components: { service, navigation, intervalD, interval },
+        components: { interval },
         data() {
             return {
                 // 头像
@@ -221,6 +212,15 @@
                 this.$router.push('/recharge')
                 window.scrollTo(0, 0)
             },
+            // 点击提现
+            withdrawFun() {
+                this.$router.push('/extensionWithdraw')
+                window.scrollTo(0, 0)
+            },
+            // 创建活动按钮
+            createButtonFun() {
+                this.$router.push('/createEvent')
+            },
             // 点击财务明细
             financialFun() {
                 this.$router.push('/financial/rechargeRecord')
@@ -228,8 +228,12 @@
             },
             // 点击工单管理
             financial2Fun() {
-                this.$router.push('/myWork')
+                this.$router.push('/workManagement/myWork')
                 window.scrollTo(0, 0)
+            },
+            // 点击公告
+            newsContentFun() {
+                this.$router.push('/noticeDetails')
             }
         }
     }
@@ -266,7 +270,6 @@
         height: 56px;
         border-radius: 50%;
         margin-right: 15px;
-        object-fit: cover;
     }
     /* 个人信息-账号 */
     .account {
@@ -488,7 +491,6 @@
         width: 347px;
         height: 181px;
         border-radius: 7px;
-        object-fit: cover;
         margin-right: 0;
     }
     /* 公告图片状态2 */

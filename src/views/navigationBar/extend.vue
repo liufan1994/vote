@@ -12,7 +12,7 @@
                 </div>
             </div>
             <!-- 账户列表 -->
-            <div class="accountA" v-for="account in accounts" :key="account.id">
+            <div class="accountA" v-for="(account,index) in accounts" :key="index" @click="accountAFun(index)">
                 <!-- 列表左 -->
                 <div class="accountLeft">{{account.accountName}}</div>
                 <!-- 列表右 -->
@@ -65,20 +65,14 @@
                 <p class="tips2">提现说明：推广佣金累计达到￥200即可提现</p>
             </div>
         </div>
-        <!-- 底部间隔 -->
-        <intervalD/>
-        <!-- 导航栏 -->
-        <navigation :myIndex="2" />
     </div>
 </template>
 <script>
-    import navigation from '../../components/navigation'
     import interval from '../../components/interval'
-    import intervalD from '../../components/intervalD'
 
     export default {
         name: 'extend',
-        components: { navigation, interval, intervalD },
+        components: { interval },
         data() {
             return {
                 // 网址
@@ -129,11 +123,22 @@
             }
         },
         methods: {
+            // 点击升级用户
             userFun() {
                 this.isShowUser = true
             },
+            // 点击未升级用户
             userFun2() {
                 this.isShowUser = false
+            },
+            // 点击账户列表
+            accountAFun(index) {
+                if (index === 0) {
+                    this.$router.push('/withdrawSetUp')
+                }
+                if (index === 2) {
+                    this.$router.push('/financial/withdrawRecord')
+                }
             }
         }
     }

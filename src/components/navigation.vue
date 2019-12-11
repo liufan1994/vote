@@ -14,46 +14,56 @@
 <script>
     export default {
         name: 'navigation',
-        props: {
-            myIndex: {
-                path: [String, Number],
-                default: 0
-            }
-        },
         data() {
             return {
+                myIndex: 0,
                 buttons: [
                     {
                         buttonImg: 'home',
                         buttonImg2: 'home-x',
                         buttonName: '首页',
-                        myRouter: '/home'
+                        myRouter: '/navigationBar/home'
                     },
                     {
                         buttonImg: 'management',
                         buttonImg2: 'management-x',
                         buttonName: '管理活动',
-                        myRouter: '/management'
+                        myRouter: '/navigationBar/management'
                     },
                     {
                         buttonImg: 'extension',
                         buttonImg2: 'extension-x',
                         buttonName: '推广中心',
-                        myRouter: '/extend'
+                        myRouter: '/navigationBar/extend'
                     },
                     {
                         buttonImg: 'my',
                         buttonImg2: 'my-x',
                         buttonName: '我的',
-                        myRouter: '/my'
+                        myRouter: '/navigationBar/my'
                     }
                 ]
             }
         },
         methods: {
-            buttonFun(button) {
+            buttonFun(button, index) {
+                this.myIndex = index
                 this.$router.push(button.myRouter)
                 window.scrollTo(0, 0)
+            }
+        },
+        mounted() {
+            if (this.$route.path === '/navigationBar/my') {
+                this.myIndex = 3
+            }
+            if (this.$route.path === '/navigationBar/extend') {
+                this.myIndex = 2
+            }
+            if (this.$route.path === '/navigationBar/management') {
+                this.myIndex = 1
+            }
+            if (this.$route.path === '/navigationBar/home') {
+                this.myIndex = 0
             }
         }
     }
@@ -71,6 +81,7 @@
         justify-content: space-around;
         background-color: #fff;
         box-shadow: 0px -2px 7px 0px rgba(51, 153, 255, 0.1);
+        z-index: 100;
     }
     /* 导航栏按钮 */
     .navigationButton {

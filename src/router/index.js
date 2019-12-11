@@ -27,29 +27,33 @@ const routes = [
         name: 'reset',
         component: () => import('../views/signIn/reset.vue')
     },
-    // 首页
+    // 导航栏-四页面
     {
-        path: '/home',
-        name: 'home',
-        component: () => import('../views/navigationBar/home.vue')
-    },
-    // 管理活动
-    {
-        path: '/management',
-        name: 'management',
-        component: () => import('../views/navigationBar/management.vue')
-    },
-    // 推广中心
-    {
-        path: '/extend',
-        name: 'extend',
-        component: () => import('../views/navigationBar/extend.vue')
-    },
-    // 我的
-    {
-        path: '/my',
-        name: 'my',
-        component: () => import('../views/navigationBar/my.vue')
+        path: '/navigationBar',
+        name: 'navigationBar',
+        component: () => import('../views/navigationBar/index.vue'),
+        children: [
+            // 推广中心
+            {
+                path: 'extend',
+                component: () => import('../views/navigationBar/extend.vue')
+            },
+            // 首页
+            {
+                path: 'home',
+                component: () => import('../views/navigationBar/home.vue')
+            },
+            // 管理活动
+            {
+                path: 'management',
+                component: () => import('../views/navigationBar/management.vue')
+            },
+            // 我的
+            {
+                path: 'my',
+                component: () => import('../views/navigationBar/my.vue')
+            }
+        ]
     },
     // 个人信息
     {
@@ -75,61 +79,96 @@ const routes = [
         name: 'financial',
         component: () => import('../views/financial/index.vue'),
         children: [
+            // 消费记录
             {
                 path: 'consumption',
                 component: () => import('../views/financial/consumption.vue')
             },
+            // 推广记录
             {
                 path: 'extendRecord',
                 component: () => import('../views/financial/extendRecord.vue')
             },
+            // 充值记录
             {
                 path: 'rechargeRecord',
                 component: () => import('../views/financial/rechargeRecord.vue')
             },
+            // 提现记录
             {
                 path: 'withdrawRecord',
                 component: () => import('../views/financial/withdrawRecord.vue')
             }
         ]
     },
-    // 充值记录
+    // 工单管理-公共页面
     {
-        path: '/rechargeRecord',
-        name: 'rechargeRecord',
-        component: () => import('../views/financial/rechargeRecord.vue')
+        path: '/workManagement',
+        name: 'workManagement',
+        component: () => import('../views/workManagement/index.vue'),
+        children: [
+            // 我的工单
+            {
+                path: 'myWork',
+                component: () => import('../views/workManagement/myWork.vue')
+            },
+            // 提交工单
+            {
+                path: 'submissionWork',
+                component: () =>
+                    import('../views/workManagement/submissionWork.vue')
+            },
+            // 我的工单-查看
+            {
+                path: 'myWorkSee',
+                component: () => import('../views/workManagement/myWorkSee.vue')
+            }
+        ]
     },
-    // 消费记录
+    // 提现账户设置
     {
-        path: '/consumption',
-        name: 'consumption',
-        component: () => import('../views/financial/consumption.vue')
+        path: '/withdrawSetUp',
+        name: 'withdrawSetUp',
+        component: () => import('../views/withdrawSetUp.vue')
     },
-    // 推广记录
+    // 推广提现
     {
-        path: '/extendRecord',
-        name: 'extendRecord',
-        component: () => import('../views/financial/extendRecord.vue')
+        path: '/extensionWithdraw',
+        name: 'extensionWithdraw',
+        component: () => import('../views/extensionWithdraw.vue')
     },
-    // 提现记录
+    // 公告详情
     {
-        path: '/withdrawRecord',
-        name: 'withdrawRecord',
-        component: () => import('../views/financial/withdrawRecord.vue')
+        path: '/noticeDetails',
+        name: 'noticeDetails',
+        component: () => import('../views/noticeDetails.vue')
     },
-    // 我的工单
+    // 创建活动
     {
-        path: '/myWork',
-        name: 'myWork',
-        component: () => import('../views/workManagement/myWork.vue')
+        path: '/createEvent',
+        name: 'createEvent',
+        component: () => import('../views/createEvent.vue')
     },
-    // 提交工单
+    // 操作记录
     {
-        path: '/submissionWork',
-        name: 'submissionWork',
-        component: () => import('../views/workManagement/submissionWork.vue')
+        path: '/operationRecord',
+        name: 'operationRecord',
+        component: () => import('../views/operationRecord.vue')
+    },
+    // 评论管理
+    {
+        path: '/comment',
+        name: 'comment',
+        component: () => import('../views/comment.vue')
+    },
+    // 票数排名
+    {
+        path: '/voteRanking',
+        name: 'voteRanking',
+        component: () => import('../views/voteRanking.vue')
     }
 ]
+
 const router = new VueRouter({
     routes
 })

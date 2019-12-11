@@ -35,7 +35,8 @@
                 <div class="myphoneTips" v-if="isShowMycode">请输入正确的验证码</div>
             </div>
         </div>
-        <div class="forgetButton" @click="forgetButtonFun">找回密码</div>
+        <!-- 找回密码 -->
+        <bigButtonDetermine class="forgetButton" @click="forgetButtonFun" determine="找回密码" />
         <!-- 立即登录 -->
         <router-link class="bottom" to="/" tag="div">
             立即登录
@@ -44,10 +45,13 @@
 </template>
 <script>
     import myhead from '../../components/myhead'
+    import bigButtonDetermine from '../../components/bigButtonDetermine'
+
     export default {
         name: 'forget',
         components: {
-            myhead
+            myhead,
+            bigButtonDetermine
         },
         data() {
             return {
@@ -211,14 +215,8 @@
     }
     /* 找回密码按钮 */
     .forgetButton {
-        width: 333px;
-        height: 42px;
-        color: #fff;
-        background-color: #3399ff;
-        text-align: center;
-        line-height: 42px;
+        width: 348px;
         margin: 80px auto 20px;
-        border-radius: 7px;
     }
     /* 立即登录 */
     .bottom {

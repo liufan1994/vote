@@ -31,7 +31,8 @@
                 <div class="tips1Register" v-if="isShowCodeR">请输入正确的验证码</div>
             </div>
         </div>
-        <div class="registerB" @click="registerButtonFun">注册</div>
+        <!-- 注册 -->
+        <bigButtonDetermine class="registerB" @click="registerButtonFun" determine="注册" />
         <!-- 立即登录 -->
         <router-link class="bottom" to="/" tag="div">
             立即登录
@@ -40,9 +41,11 @@
 </template>
 <script>
     import myhead from '../../components/myhead'
+    import bigButtonDetermine from '../../components/bigButtonDetermine'
+
     export default {
         name: 'register',
-        components: { myhead },
+        components: { myhead, bigButtonDetermine },
         data() {
             return {
                 // 输入框错误提示
@@ -229,14 +232,8 @@
     }
     /* 登录按钮 */
     .registerB {
-        width: 333px;
-        height: 42px;
-        color: #fff;
-        background-color: #3399ff;
-        text-align: center;
-        line-height: 42px;
-        margin: 80px auto 20px;
-        border-radius: 7px;
+        width: 348px;
+        margin: 60px auto 20px;
     }
     /* 立即登录 */
     .bottom {

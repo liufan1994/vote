@@ -1,8 +1,6 @@
 <template>
     <!-- 我的工单 -->
     <div class="myWork">
-        <!-- 标头 -->
-        <myTitle titleName="工单管理" />
         <!-- 工单管理tab -->
         <workManagementTab :myIndex="0" />
         <!-- 间隔 -->
@@ -18,21 +16,19 @@
                 </div>
             </div>
             <div class="workListRight">
-                <span class="workListSee">查看</span>
+                <span class="workListSee" @click="workListSeeFun(myWorkList)">查看</span>
                 <span class="workListDelete">删除</span>
             </div>
         </div>
     </div>
 </template>
 <script>
-    import myTitle from '../../components/myTitle'
     import workManagementTab from '../../components/workManagementTab'
     import interval from '../../components/interval'
 
     export default {
         name: 'myWork',
         components: {
-            myTitle,
             workManagementTab,
             interval
         },
@@ -65,6 +61,19 @@
                         workListDataTime: '2019-05-16 00:00:00'
                     }
                 ]
+            }
+        },
+        methods: {
+            // 点击查看
+            workListSeeFun(myWorkList) {
+                this.$router.push({
+                    path: '/workManagement/myWorkSee',
+                    query: {
+                        state: myWorkList.workListDataText,
+                        name: myWorkList.workListName
+                    }
+                })
+                window.scrollTo(0, 0)
             }
         }
     }

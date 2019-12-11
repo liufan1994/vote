@@ -1,5 +1,5 @@
 <template>
-    <!-- 活动状态tab -->
+    <!-- 管理活动tab -->
     <div class="foundTab">
         <div class="foundTabText" :class="{foundTabText2:myIndex===index}" v-for="(text,index) in texts" :key="text.id" @click="textFun(text,index)">{{text.foundTabText}}</div>
     </div>
@@ -46,7 +46,7 @@
         justify-content: space-around;
         border-bottom: #f0f0f0 1px solid;
         line-height: 38px;
-        background-color: #f0f0f0;
+        background-color: #f5f5f5;
     }
     .foundTabText {
         width: 33%;

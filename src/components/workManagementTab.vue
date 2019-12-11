@@ -19,11 +19,11 @@
                 workNames: [
                     {
                         workName: '我的工单',
-                        myRouter: '/myWork'
+                        myRouter: '/workManagement/myWork'
                     },
                     {
                         workName: '提交工单',
-                        myRouter: '/submissionWork'
+                        myRouter: '/workManagement/submissionWork'
                     }
                 ]
             }

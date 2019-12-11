@@ -12,10 +12,12 @@
         <div class="memberVip">
             <span class="memberCurrentName">升级会员</span>
             <div class="memberVip1" :class="{memberVip3:isShowmemberVip3}" @click="memberVipFun">
+                <div class="memberVipMask"></div>
                 <div class="memberVipName1">银卡会员</div>
                 <img class="memberVipImg" src="../assets/silverCard.png">
             </div>
             <div class="memberVip2" :class="{memberVip4:isShowmemberVip4}" @click="memberVipAFun">
+                <div class="memberVipMask2"></div>
                 <div class="memberVipName2">金卡会员</div>
                 <img class="memberVipImg" src="../assets/goldCard.png">
             </div>
@@ -139,6 +141,7 @@
     .memberVip1,
     .memberVip2 {
         height: 90px;
+        position: relative;
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -146,6 +149,7 @@
         border-radius: 7px;
         padding: 0 34px;
         margin-top: 20px;
+        overflow: hidden;
     }
     .memberVip2 {
         box-shadow: 0px 5px 17px 0px rgba(248, 160, 108, 0.1);
@@ -155,6 +159,20 @@
     }
     .memberVip4 {
         border: #f8a06c 1px solid;
+    }
+    /* 会员卡样式遮罩 */
+    .memberVipMask,
+    .memberVipMask2 {
+        width: 200px;
+        height: 180px;
+        position: absolute;
+        top: 10px;
+        right: 235px;
+        background-color: rgba(57, 216, 242, 0.1);
+        transform: rotate(-40deg);
+    }
+    .memberVipMask2 {
+        background: rgba(248, 160, 108, 0.1);
     }
     /* 银卡会员/金卡会员 */
     .memberVipName1,

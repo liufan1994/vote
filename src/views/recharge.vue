@@ -1,6 +1,8 @@
 <template>
     <!-- 充值中心 -->
     <div class="recharge">
+        <!-- 标头 -->
+        <myTitle titleName="充值中心" />
         <!-- 选中金额 -->
         <div class="rechargeContent">
             <!-- 当前余额 -->
@@ -33,16 +35,20 @@
             </div>
         </div>
         <!-- 确认支付 -->
-        <div class="paymentButton">确认支付</div>
+        <bigButtonDetermine determine="确认支付" />
     </div>
 </template>
 <script>
+    import myTitle from '../components/myTitle'
     import interval from '../components/interval'
+    import bigButtonDetermine from '../components/bigButtonDetermine'
 
     export default {
         name: 'recharge',
         components: {
-            interval
+            myTitle,
+            interval,
+            bigButtonDetermine
         },
         data() {
             return {
@@ -150,8 +156,8 @@
         color: #3399ff;
     }
     .choiceMoney3 {
-        width: 102px;
-        height: 45px;
+        width: 106px;
+        height: 49px;
         margin-right: 0;
     }
     .choiceMoney4 {
@@ -195,15 +201,5 @@
     .methodAlipayCheck {
         width: 24px;
         height: 24px;
-    }
-    /* 确认支付 */
-    .paymentButton {
-        height: 42px;
-        background-color: #3399ff;
-        border-radius: 7px;
-        text-align: center;
-        line-height: 42px;
-        color: #fff;
-        margin: 40px 14px;
     }
 </style>

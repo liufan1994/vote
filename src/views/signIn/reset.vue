@@ -32,7 +32,7 @@
                 <div class="tips1Reset" v-if="isShowPasswordR2">请输入正确的确认密码</div>
             </div>
         </div>
-        <div class="resetButton" @click="resetButtonFun">确认</div>
+        <bigButtonDetermine class="resetButton" @click="resetButtonFun" />
         <!-- 立即登录 -->
         <router-link class="bottom" to="/" tag="div">
             立即登录
@@ -41,10 +41,13 @@
 </template>
 <script>
     import myhead from '../../components/myhead'
+    import bigButtonDetermine from '../../components/bigButtonDetermine'
+
     export default {
         name: 'reset',
         components: {
-            myhead
+            myhead,
+            bigButtonDetermine
         },
         data() {
             return {
@@ -172,14 +175,8 @@
     }
     /* 确认按钮 */
     .resetButton {
-        width: 333px;
-        height: 42px;
-        color: #fff;
-        background-color: #3399ff;
-        text-align: center;
-        line-height: 42px;
+        width: 348px;
         margin: 80px auto 20px;
-        border-radius: 7px;
     }
     /* 立即登录 */
     .bottom {
