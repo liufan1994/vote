@@ -166,6 +166,26 @@ const routes = [
         path: '/voteRanking',
         name: 'voteRanking',
         component: () => import('../views/voteRanking.vue')
+    },
+    // 活动设置
+    {
+        path: '/activitySettings',
+        name: 'activitySettings',
+        component: () => import('../views/activitySettings/index.vue'),
+        children: [
+            // 基本设置
+            {
+                path: 'basicSetup',
+                component: () =>
+                    import('../views/activitySettings/basicSetup.vue')
+            },
+            // 轮播图设置
+            {
+                path: 'carouselSetup',
+                component: () =>
+                    import('../views/activitySettings/carouselSetup.vue')
+            }
+        ]
     }
 ]
 

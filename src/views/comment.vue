@@ -9,51 +9,54 @@
         <commentTab @commentTab0-fun="commentTab0Fun" @commentTab1-fun="commentTab1Fun" @commentTab2-fun="commentTab2Fun" @commentTab3-fun="commentTab3Fun" />
         <!-- 批量操作 -->
         <div class="Batch">
-            <!-- 复选框 -->
+            <!-- 批量操作-复选框 -->
             <div @click="fuxuankuangFun">
                 <div class="iconfont icon-fuxuankuang1" v-if="isShowBatch"></div>
                 <div class="iconfont icon-fuxuankuang" v-else></div>
             </div>
-            <!-- 操作按钮 -->
-            <div class="BatchName">
+            <!-- 批量操作-操作按钮 -->
+            <div class="BatchName" @click.stop="BatchNameFun">
                 <div>操作</div>
                 <div class="iconfont icon-xiala"></div>
+                <dropDownBox class="dropDownBox" :dropDownBoxs="dropDownBoxs2" v-if="isShowDropDownBox" @dropDownBox-fun="dropDownBoxFun2" />
             </div>
         </div>
         <!-- 评论管理-列表 -->
         <div class="commentList" v-for="(commentList,index2) in commentLists2" :key="index2">
-            <!-- 复选框 -->
-            <div @click="fuxuankuangFun2(index2)">
-                <div class="iconfont icon-fuxuankuang1" v-if="myIndex2.includes(index2)"></div>
-                <div class="iconfont icon-fuxuankuang" v-else></div>
-            </div>
-            <!-- 头像 -->
-            <img class="commentListHead" :src="require('../assets/'+commentList.commentListHead)">
-            <!-- 内容 -->
-            <div class="commentListContent">
-                <div class="commentListTop">
-                    <!-- 评论用户名称 -->
-                    <div class="commentListName">{{commentList.commentListName}}</div>
-                    <!-- 被评论选手 -->
-                    <div class="commentListNumber">选手{{commentList.commentListNumber}}</div>
+            <div class="commentList2">
+                <!-- 复选框 -->
+                <div @click="fuxuankuangFun2(index2)">
+                    <div class="iconfont icon-fuxuankuang1" v-if="myIndex2.includes(index2)"></div>
+                    <div class="iconfont icon-fuxuankuang" v-else></div>
                 </div>
-                <div class="commentListCenter">
-                    <!-- 活动名称 -->
-                    <div class="commentListHuod">{{commentList.commentListHuod}}</div>
-                    <!-- 评论状态 -->
-                    <div class="commentListState" @click.stop="commentListStateFun(index2)">
-                        <div class="commentListStateText" :class="[commentListStateText2===commentList.commentListStateText?'commentListStateText2':(commentListStateText3===commentList.commentListStateText?'commentListStateText3':'')]">{{commentList.commentListStateText}}</div>
-                        <div class="iconfont icon-xiala"></div>
-                        <!-- 下拉框 -->
-                        <dropDownBox :dropDownBoxs="dropDownBoxs" v-if="myIndex===index2" @dropDownBox-fun="index=>dropDownBoxFun(index,index2)" />
+                <!-- 头像 -->
+                <img class="commentListHead" :src="require('../assets/'+commentList.commentListHead)">
+                <!-- 内容 -->
+                <div class="commentListContent">
+                    <div class="commentListTop">
+                        <!-- 评论用户名称 -->
+                        <div class="commentListName">{{commentList.commentListName}}</div>
+                        <!-- 被评论选手 -->
+                        <div class="commentListNumber">选手{{commentList.commentListNumber}}</div>
                     </div>
-                </div>
-                <!-- 评论内容-超出展开 -->
-                <div :data-content="commentList.commentListComment" :class="{textPackUp:commentList.commentListComment.length>38&&!textOpen}" class="top-wrapper">
-                    <div class="context">
-                        {{ commentList.commentListComment }}
+                    <div class="commentListCenter">
+                        <!-- 活动名称 -->
+                        <div class="commentListHuod">{{commentList.commentListHuod}}</div>
+                        <!-- 评论状态 -->
+                        <div class="commentListState" @click.stop="commentListStateFun(index2)">
+                            <div class="commentListStateText" :class="[commentListStateText2===commentList.commentListStateText?'commentListStateText2':(commentListStateText3===commentList.commentListStateText?'commentListStateText3':'')]">{{commentList.commentListStateText}}</div>
+                            <div class="iconfont icon-xiala"></div>
+                            <!-- 下拉框 -->
+                            <dropDownBox :dropDownBoxs="dropDownBoxs" v-if="myIndex===index2" @dropDownBox-fun="index=>dropDownBoxFun(index,index2)" />
+                        </div>
                     </div>
-                    <span v-if="commentList.commentListComment.length>38" class="more" @click.stop="textOpen=!textOpen">{{ textOpen?'收起':'展开' }}</span>
+                    <!-- 评论内容-超出展开 -->
+                    <div :data-content="commentList.commentListComment" :class="{textPackUp:commentList.commentListComment.length>38&&!textOpen}" class="top-wrapper">
+                        <div class="context">
+                            {{ commentList.commentListComment }}
+                        </div>
+                        <span v-if="commentList.commentListComment.length>38" class="more" @click.stop="textOpen=!textOpen">{{ textOpen?'收起':'展开' }}</span>
+                    </div>
                 </div>
             </div>
             <!-- 删除 -->
@@ -83,7 +86,21 @@
             return {
                 // 批量操作复选框
                 isShowBatch: false,
-                // 复选框选中的数组
+                // 批量操作-下拉框是否隐藏
+                isShowDropDownBox: false,
+                // 批量操作-下拉框列表
+                dropDownBoxs2: [
+                    {
+                        dropDownBox: '待审核'
+                    },
+                    {
+                        dropDownBox: '通过'
+                    },
+                    {
+                        dropDownBox: '拒绝'
+                    }
+                ],
+                // 评论列表-复选框选中的数组
                 myIndex2: [],
                 // 评论内容是否展开
                 textOpen: false,
@@ -164,6 +181,7 @@
             // 点击整个页面
             commentFun() {
                 this.myIndex = -1
+                this.isShowDropDownBox = false
             },
             // 点击tab下标为0时
             commentTab0Fun() {
@@ -209,7 +227,20 @@
                     this.myIndex2 = []
                 }
             },
-            // 点击列表-复选框-未选中
+            // 点击批量操作按钮
+            BatchNameFun() {
+                this.isShowDropDownBox = !this.isShowDropDownBox
+            },
+            // 点击批量操作-下拉框列表
+            dropDownBoxFun2(index) {
+                this.myIndex2.map(myIndex => {
+                    // console.log(myIndex)
+                    this.commentLists2[
+                        myIndex
+                    ].commentListStateText = this.dropDownBoxs2[index].dropDownBox
+                })
+            },
+            // 点击列表-复选框
             fuxuankuangFun2(index2) {
                 let _myIndex2 = this.myIndex2.findIndex(number => {
                     return number === index2
@@ -275,6 +306,7 @@
     }
     /* 操作按钮 */
     .BatchName {
+        position: relative;
         display: flex;
         align-items: center;
     }
@@ -282,15 +314,22 @@
         font-size: 20px;
         color: #666;
     }
+    .dropDownBox {
+        position: absolute;
+        left: -33px;
+    }
     /* 评论管理-列表 */
     .commentList {
         position: relative;
+        border-bottom: #f5f5f5 1px solid;
+    }
+    .commentList2 {
+        position: relative;
+        right: 0px;
         display: flex;
         align-items: center;
         padding: 24px 14px;
         background-color: #fff;
-        border-bottom: #f5f5f5 1px solid;
-        /* z-index: 10; */
     }
     .commentListHead {
         width: 49px;

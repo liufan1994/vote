@@ -237,6 +237,9 @@
             },
             // 点击子活动设置下拉框
             dropDownBoxFun2(index) {
+                if (index === 0) {
+                    this.$router.push('/activitySettings/basicSetup')
+                }
                 if (index === 4) {
                     this.$router.push('/comment')
                 }
